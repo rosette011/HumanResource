@@ -1,7 +1,6 @@
 from django.urls import reverse
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
-# from django.contrib.auth import authenticate, login
 
 def index(request):
     return render(request, 'registration/login.html')
