@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'human_resource/base.html' %}
 {% block page_title %} Dashboard {% endblock %}
 {% block page_name %} Dashboard {% endblock %}
 
@@ -17,6 +17,12 @@
                     <div class="progress progress-template">
                         <div role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-template dashbg-1"></div>
                     </div>
+                     <div class="">{{ name }}</div>
+                        <ul>
+                            {% for num in numbers %}
+                            <li>{{ num }}</li>
+                            {% endfor %}
+                        </ul>
                 </div>
             </div>
         </div>
