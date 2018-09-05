@@ -1,0 +1,10 @@
+{% if error_message %}
+<p class="text-danger">{{ error_message }}</p>
+{% endif %}
+{% for field in form %}
+    <div class="form-group-material">
+        {{ field }}
+        <div id="{{ field.name }}-error" class="is-invalid invalid-feedback" style="display: block;">{{ field.errors }}</div>
+        <label class="label-material" for="{{ field.auto_id }}">{{ field.label }}</label>
+    </div>
+{% endfor %}

@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
-from .forms import RegistrationForm
+from .forms import RegistrationForm, LoginForm
 from django.contrib.auth import authenticate, login as auth_login
 
 def login(request):
-    return render(request, 'registration/login.html')
+    form = LoginForm()
+    return render(request, 'registration/login.html',{'form':form})
 
 def register(request):
 

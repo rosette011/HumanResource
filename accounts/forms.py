@@ -1,9 +1,89 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+
+class LoginForm(AuthenticationForm):
+
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'data-msg': 'Please enter your username',
+                'class': 'input-material',
+            }
+        )
+    )
+
+    password = forms.CharField(
+        label='Password',
+        widget=forms.PasswordInput(
+            attrs={
+                'data-msg': 'Please enter your password',
+                'class': 'input-material',
+            }
+        )
+    )
+
 
 class RegistrationForm(UserCreationForm):
-    email = forms.EmailField(required=True)
+
+    first_name = forms.CharField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                'data-msg': 'Please enter your first name',
+                'class': 'input-material',
+            }
+        )
+    )
+
+    last_name = forms.CharField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                'data-msg': 'Please enter your last name',
+                'class': 'input-material',
+            }
+        )
+    )
+
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'data-msg': 'Please enter your username',
+                'class': 'input-material',
+            }
+        )
+    )
+
+    password1 = forms.CharField(
+        label='Password',
+        widget=forms.PasswordInput(
+            attrs={
+                'data-msg': 'Please enter your password',
+                'class': 'input-material',
+            }
+        )
+    )
+
+    password2 = forms.CharField(
+        label='Confirm Password',
+        widget=forms.PasswordInput(
+            attrs={
+                'data-msg': 'Please enter your password',
+                'class': 'input-material',
+            }
+        )
+    )
+
+    email = forms.EmailField(
+        required=True,
+        widget=forms.EmailInput(
+            attrs={
+                'data-msg': 'Please enter a valid email address',
+                'class': 'input-material',
+            }
+        )
+    )
 
     class Meta:
         model  = User
