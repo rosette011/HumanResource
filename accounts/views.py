@@ -1,6 +1,5 @@
-from django.urls import reverse
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
+from .forms import RegistrationForm
 from django.contrib.auth import authenticate, login as auth_login
 
 def login(request):
@@ -9,7 +8,7 @@ def login(request):
 def register(request):
 
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data['username']
@@ -18,7 +17,7 @@ def register(request):
             auth_login(request,user)
             return redirect('login')
     else:
-        form = UserCreationForm()
+        form = RegistrationForm()
 
     context = {'form':form}
     return render(request,'registration/register.html',context)
