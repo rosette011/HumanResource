@@ -1,6 +1,24 @@
 {% extends 'registration/base.html' %}
 {% block title %}Login | {% endblock %}
 {% block content %}
+
+{% if error_message %}
+<p class="text-danger">{{ error_message }}</p>
+{% endif %}
+
+{% if form.errors %}
+  <p class="text-danger" >Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+  {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+  {% else %}
+    <p>Please login to see this page.</p>
+  {% endif %}
+{% endif %}
+
 <form method="POST" class="form-validate" autocomplete="off">
     {% csrf_token %}
     {% include 'registration/form-template.html' %}
