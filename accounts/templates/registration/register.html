@@ -3,10 +3,12 @@
 {% block content %}
 {% if form.errors %}
 <p class="text-danger">Please enter a correct username and password. Note that both fields may be case-sensitive.</p>
-{% endif %} {% if next %}
+<p class="text-danger">{{ form.errors }}</p>
+{% endif %} 
+{% if next %}
 <p class="text-danger">Sorry you don't have access to that page.</p>
 {% endif %}
-<form action="POST" action="{% url 'accounts:register' %}" class="text-left form-validate">
+<form method="POST" class="text-left form-validate" autocomplete="">
     {% csrf_token %}
     <div class="form-group-material">
         <input id="first-name" type="text" name="first_name" required data-msg="Please enter your first name" class="input-material">
