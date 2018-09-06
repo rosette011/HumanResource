@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import RegistrationForm, LoginForm
 from django.contrib.auth import authenticate, login as auth_login
 
+
 def login(request):
     form = LoginForm()
     return render(request, 'registration/login.html',{'form':form})
@@ -22,3 +23,11 @@ def register(request):
 
     context = {'form':form}
     return render(request,'registration/register.html',context)
+
+def profile_view(request):
+    args = {'user':request.user}
+    return render(request,'accounts/profile.html')
+
+def profile_edit(request):
+    args = {'user':request.user}
+    return render(request,'accounts/profile.html')
