@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{% block page_title %}Human Resource{% endblock %}</title>
+    <title>{% block page_title %}{% endblock %}Human Resource</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -62,10 +62,10 @@
     <nav id="sidebar">
         <!-- Sidebar Header-->
         <div class="sidebar-header d-flex align-items-center">
-            <div class="avatar"><img src="img/avatar-6.jpg" alt="..." class="img-fluid rounded-circle"></div>
+            <div class="avatar"><img src="https://avatars2.githubusercontent.com/u/15060167?s=460&v=4" alt="..." class="img-fluid rounded-circle"></div>
             <div class="title">
-                <h1 class="h5">Mark Stephen</h1>
-                <p>Web Designer</p>
+                <h1 class="h5">{{ user.first_name }} {{ user.last_name }}</h1>
+                <p>Software Developer</p>
             </div>
         </div>
         <!-- Sidebar Navidation Menus--><span class="heading">Main</span>

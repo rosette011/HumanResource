@@ -30,7 +30,7 @@ def register(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
-            auth_login(request, user)
+            login(request, user)
             return redirect('human_resource:home')
     else:
         form = RegistrationForm()
@@ -41,9 +41,9 @@ def register(request):
 
 def profile_view(request):
     args = {'user': request.user}
-    return render(request, 'accounts/profile.html')
+    return render(request, 'accounts/profile.html',args)
 
 
 def profile_edit(request):
     args = {'user': request.user}
-    return render(request, 'accounts/profile_edit.html')
+    return render(request, 'accounts/profile_edit.html',args)
