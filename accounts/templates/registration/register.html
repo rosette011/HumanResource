@@ -6,7 +6,7 @@
 {% endif %}
 <form method="POST" class="text-left form-validate" action="{% url 'accounts:register' %}" autocomplete="">
     {% csrf_token %}
-    {% include 'registration/form-template.html' %}
+    {% include 'registration/registration-form-template.html' %}
     <div class="form-group text-center">
         <input id="register" type="submit" value="Register" class="btn btn-primary">
     </div>

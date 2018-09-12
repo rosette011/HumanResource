@@ -7,22 +7,21 @@
 {% endif %}
 
 {% if form.errors %}
-<p class="text-danger">Your username and password didn't match. Please try again.</p>
+ <p class="text-danger">Your username and password didn't match. Please try again.</p>
 {% endif %}
 
 {% if next %}
-{% if user.is_authenticated %}
-<p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-{% else %}
-<p>Please login to see this page.</p>
-{% endif %}
+    {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>
+    {% else %}
+        <p>Please login to see this page.</p>
+    {% endif %}
 {% endif %}
 
 <form method="POST" class="form-validate" action="{% url 'accounts:login' %}" autocomplete="off">
     {% csrf_token %}
-    {% include 'registration/form-template.html' %}
-    <input type="submit" value="Login" class="btn btn-primary"/>
+    {% include 'registration/registration-form-template.html' %}
+    <input type="submit" value="Login" class="btn btn-primary" />
 </form>
 <a href="#" class="forgot-pass">Forgot Password?</a><br>
 <small>Do not have an account? </small><a href="{% url 'accounts:register' %}" class="signup">Signup</a>

@@ -100,15 +100,15 @@
         </nav>
         <!-- Sidebar Navigation end-->
         <div class="page-content">
-            <div class="page-header">
+            <div class="page-header {% block custom_margin %}{% endblock %}">
                 <div class="container-fluid">
                     <h2 class="h5 no-margin-bottom">{% block page_name %}Human Resource{% endblock %}</h2>
                 </div>
             </div>
 
-            {% block content %}
+            {% block breadcrumb %}{% endblock %}
 
-            {% endblock %}
+            {% block content %}{% endblock %}
 
             <footer class="footer">
                 <div class="footer__block block no-margin-bottom">

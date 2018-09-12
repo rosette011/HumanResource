@@ -1,19 +1,37 @@
 {% extends 'human_resource/base.html' %}
 {% block page_title %}Profile Edit | {% endblock %}
-
+{% block page_name %} Profile {% endblock %}
+{% block custom_margin %}no-margin-bottom{% endblock %}
+{% block breadcrumb %}
+<div class="container-fluid">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'human_resource:home' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'accounts:profile_view' %}">Profile</a></li>
+        <li class="breadcrumb-item active">Edit</li>
+    </ul>
+</div>
+{% endblock %}
 {% block content %}
-    <div class="container">
-        <h2>Profile</h2>
-        <ul>
-            <li>{{ user.username }}</li>
-            <li>{{ user.first_name }}</li>
-            <li>{{ user.last_name }}</li>
-            <li>{{ user.email }}</li>
-        </ul>
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <form method="POST" action="{% url 'accounts:profile_edit' %}" class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Edit Profile</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            {% csrf_token %}
+                            {% include 'accounts/profile-form-template.html' %}
+                        </div>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <form method="POST" class="form-validate" action="{% url 'accounts:profile_edit' %}" autocomplete="off">
-            {% csrf_token %}
-            {% include 'registration/form-template.html' %}
-            <input type="submit" value="Update Profile" class="btn btn-primary" />
-        </form>
+</section>
 {% endblock %}
