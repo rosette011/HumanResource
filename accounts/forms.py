@@ -1,6 +1,12 @@
+from collections import OrderedDict
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
+from django.contrib.auth.forms import (
+    UserCreationForm,
+    AuthenticationForm,
+    UserChangeForm,
+    PasswordChangeForm
+)
 
 
 class LoginForm(AuthenticationForm):
@@ -108,7 +114,6 @@ class RegistrationForm(UserCreationForm):
 
 
 class UpdateProfileForm(UserChangeForm):
-
     username = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -129,7 +134,7 @@ class UpdateProfileForm(UserChangeForm):
     first_name = forms.CharField(
         required=True,
         widget=forms.TextInput(
-           attrs={
+            attrs={
                 'class': 'form-control',
             }
         )
@@ -143,13 +148,42 @@ class UpdateProfileForm(UserChangeForm):
             }
         )
     )
-    
+
     class Meta:
         model = User
         fields = (
             'username',
             'email',
             'first_name',
-            'last_name',    
+            'last_name',
             'password',
         )
+
+
+class ChangePasswordForm(PasswordChangeForm):
+    old_password = forms.CharField(
+        label='Current Password',
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+            }
+        )
+    )
+
+    new_password1 = forms.CharField(
+        label='New Password',
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+            }
+        )
+    )
+
+    new_password2 = forms.CharField(
+        label='Confirm New Password',
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+            }
+        )
+    )
