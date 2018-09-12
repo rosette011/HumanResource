@@ -1,6 +1,19 @@
-from django.shortcuts import render, redirect, HttpResponse
-from .forms import RegistrationForm, LoginForm, UpdateProfileForm
-from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import (
+    render, 
+    redirect, 
+    HttpResponse
+)
+from .forms import (
+    RegistrationForm, 
+    LoginForm, 
+    UpdateProfileForm
+)
+from django.contrib.auth import (
+    authenticate, 
+    login, 
+    logout
+)
+from django.contrib.auth.forms import PasswordChangeForm
 
 def login_view(request):
     if request.method == 'POST':
@@ -51,6 +64,17 @@ def profile_edit(request):
             return redirect('accounts:profile_view')
     else:
         form = UpdateProfileForm(instance=request.user)
+        context = {'form': form}
+        return render(request, 'accounts/profile_edit.html', context)
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.post,instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:profile_view')
+    else:
+        form = PasswordChangeForm(instance=request.user)
         context = {'form': form}
         return render(request, 'accounts/profile_edit.html', context)
     
