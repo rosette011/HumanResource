@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .forms import RegistrationForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserChangeForm
 
 
 def login_view(request):
@@ -45,5 +46,13 @@ def profile_view(request):
 
 
 def profile_edit(request):
-    args = {'user': request.user}
-    return render(request, 'accounts/profile_edit.html',args)
+    if request.method == 'POST':
+        form = UserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:profile_view')
+    else:
+        form = UserChangeForm(instance=request.user)
+        context = {'form': form}
+        return render(request, 'accounts/profile_edit.html', context)
+    
