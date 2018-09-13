@@ -1,19 +1,21 @@
 from django.shortcuts import (
-    render, 
-    redirect, 
+    render,
+    redirect,
     HttpResponse
 )
 from .forms import (
-    RegistrationForm, 
-    LoginForm, 
+    RegistrationForm,
+    LoginForm,
     UpdateProfileForm,
     ChangePasswordForm
 )
 from django.contrib.auth import (
-    authenticate, 
-    login, 
+    authenticate,
+    login,
     logout
 )
+
+from django.contrib.auth import update_session_auth_hash
 
 def login_view(request):
     if request.method == 'POST':
@@ -28,6 +30,7 @@ def login_view(request):
         form = LoginForm()
     context = {'form': form}
     return render(request, 'registration/login.html', context)
+
 
 def logout_view(request):
     logout(request)
@@ -53,7 +56,7 @@ def register(request):
 
 def profile_view(request):
     args = {'user': request.user}
-    return render(request, 'accounts/profile.html',args)
+    return render(request, 'accounts/profile.html', args)
 
 
 def profile_edit(request):
@@ -67,14 +70,16 @@ def profile_edit(request):
         context = {'form': form}
         return render(request, 'accounts/profile_edit.html', context)
 
+
 def change_password(request):
     if request.method == 'POST':
-        form = ChangePasswordForm(data=request.POST,user=request.user)
+        form = ChangePasswordForm(request.user, request.POST)
         if form.is_valid():
             form.save()
+            update_session_auth_hash(request, form.user)
             return redirect('accounts:profile_view')
-    else:
-        form = ChangePasswordForm(user=request.user)
 
-    context = {'form': form}
-    return render(request, 'accounts/change_password.html', context)
+    else:
+        form = ChangePasswordForm(request.user)
+
+    return render(request, 'accounts/change_password.html', {'form': form})
