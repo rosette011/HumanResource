@@ -122,3 +122,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/human_resource/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only

@@ -25,7 +25,7 @@ def login_view(request):
             password = form.cleaned_data['password']
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('human_resource:home')
+            return redirect('human_resource:home')  
     else:
         form = LoginForm()
     context = {'form': form}
@@ -68,7 +68,7 @@ def profile_edit(request):
     else:
         form = UpdateProfileForm(instance=request.user)
         context = {'form': form}
-        return render(request, 'accounts/profile_edit.html', context)
+        return render(request, 'accounts/profile-edit.html', context)
 
 
 def change_password(request):
@@ -82,4 +82,4 @@ def change_password(request):
     else:
         form = ChangePasswordForm(request.user)
 
-    return render(request, 'accounts/change_password.html', {'form': form})
+    return render(request, 'accounts/change-password.html', {'form': form})
