@@ -1,7 +1,6 @@
 from django.shortcuts import (
     render,
-    redirect,
-    HttpResponse
+    redirect
 )
 from .forms import (
     RegistrationForm,
@@ -17,6 +16,8 @@ from django.contrib.auth import (
 
 from django.contrib.auth import update_session_auth_hash
 
+import pdb
+
 def login_view(request):
     if request.method == 'POST':
         form = LoginForm(data=request.POST)
@@ -25,9 +26,12 @@ def login_view(request):
             password = form.cleaned_data['password']
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('human_resource:home')  
+            return redirect('human_resource:home')
+        # else:
+        #     pdb.set_trace()
     else:
         form = LoginForm()
+
     context = {'form': form}
     return render(request, 'registration/login.html', context)
 
