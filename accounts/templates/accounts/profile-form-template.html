@@ -1,12 +1,21 @@
 {% if error_message %}
 <p class="text-danger">{{ error_message }}</p>
 {% endif %}
+
+{% if form.non_field_errors %}
+    <div class="page-header">
+    {% for error in form.non_field_errors %}
+        <p class="text-danger">{{ error }}</p>
+    {% endfor %}
+    </div>
+{% endif %}
+
 {% for field in form %}
 <div class="col-sm-6 col-md-6">
     <div class="form-group mb-4">
         <label class="form-label" for="{{ field.auto_id }}">{{ field.label }}</label>
         {{ field}}
-        <div id="{{ field.name }}-error" class="is-invalid invalid-feedback" style="display: block;">{{ field.errors }}</div>
+        <p id="{{ field.name }}-error" class="is-invalid invalid-feedback" style="display: block;">{{ field.errors.as_text }}</p>
     </div>
 </div>
 {% endfor %}

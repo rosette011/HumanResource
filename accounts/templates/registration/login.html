@@ -15,6 +15,6 @@
     {% include 'registration/registration-form-template.html' %}
     <input type="submit" value="Login" class="btn btn-primary" />
 </form>
-<a href="{% url 'accounts:password_reset' %}" class="forgot-pass">Forgot Password?</a><br>
+<a href="{% url 'password_reset' %}" class="forgot-pass">Forgot Password?</a><br>
 <small>Do not have an account? </small><a href="{% url 'accounts:register' %}" class="signup">Signup</a>
 {% endblock %}

@@ -5,6 +5,6 @@ app_name = 'human_resource'
 
 urlpatterns = [
 
-    path('', views.home, name="home"),
+    path('dashboard', views.home, name="home"),
 
 ]

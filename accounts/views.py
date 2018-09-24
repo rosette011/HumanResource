@@ -3,8 +3,8 @@ from django.shortcuts import (
     redirect
 )
 from .forms import (
-    RegistrationForm,
     LoginForm,
+    RegistrationForm,
     UpdateProfileForm,
     ChangePasswordForm
 )
@@ -15,6 +15,7 @@ from django.contrib.auth import (
 )
 
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 
 import pdb
 
@@ -50,19 +51,19 @@ def register(request):
             password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('human_resource:home')
+            return redirect('accounts:login')
     else:
         form = RegistrationForm()
 
     context = {'form': form}
     return render(request, 'registration/register.html', context)
 
-
+@login_required
 def profile_view(request):
     args = {'user': request.user}
     return render(request, 'accounts/profile.html', args)
 
-
+@login_required
 def profile_edit(request):
     if request.method == 'POST':
         form = UpdateProfileForm(request.POST, instance=request.user)
@@ -74,7 +75,7 @@ def profile_edit(request):
         context = {'form': form}
         return render(request, 'accounts/profile-edit.html', context)
 
-
+@login_required
 def change_password(request):
     if request.method == 'POST':
         form = ChangePasswordForm(request.user, request.POST)
