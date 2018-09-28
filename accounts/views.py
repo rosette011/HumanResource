@@ -28,8 +28,6 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             login(request, user)
             return redirect('human_resource:home')
-        # else:
-        #     pdb.set_trace()
     else:
         form = LoginForm()
 
@@ -61,6 +59,7 @@ def register(request):
 @login_required
 def profile_view(request):
     args = {'user': request.user}
+    # pdb.set_trace()
     return render(request, 'accounts/profile.html', args)
 
 @login_required

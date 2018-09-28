@@ -13,7 +13,7 @@
 {% for field in form %}
 <div class="form-group-material">
     {{ field }}
-    <div id="{{ field.name }}-error" class="is-invalid invalid-feedback" style="display: block;">{{ field.errors }}</div>
+    <div id="{{ field.name }}-error" class="is-invalid invalid-feedback" style="display: block;">{{ field.errors.as_text }}</div>
     <label class="label-material" for="{{ field.auto_id }}">{{ field.label }}</label>
 </div>
 {% endfor %}

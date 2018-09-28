@@ -67,7 +67,7 @@
             <!-- Sidebar Header-->
             <div class="sidebar-header d-flex align-items-center">
                 <div class="avatar">
-                    <img src="https://avatars2.githubusercontent.com/u/15060167?s=460&v=4" alt="..." class="img-fluid rounded-circle">
+                    <img src="{{ user.profile.image.url }}" alt="..." class="img-fluid rounded-circle">
                 </div>
                 <a href="{% url 'accounts:profile_view' %}">
                     <div class="title">

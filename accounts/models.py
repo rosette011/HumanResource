@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from PIL import Image
 
 class Role(models.Model):
     name = models.CharField(max_length=250)
@@ -9,7 +10,7 @@ class Role(models.Model):
     def __str__(self):
         return self.name + ", " + self.description
 
-class UserProfile(models.Model):
+class Profile(models.Model):
     user_id = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='avatar.jpg', upload_to='profile_pics')
     role_id = models.ForeignKey(Role,on_delete=models.CASCADE)

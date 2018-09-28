@@ -9,7 +9,7 @@
             <div class="col-lg-12">
                 <div class="card card-profile">
                     <div style="background-image: url(img/photos/paul-morris-116514-unsplash.jpg);" class="card-header"></div>
-                    <div class="card-body text-center"><img src="https://avatars2.githubusercontent.com/u/15060167?s=460&v=4" class="card-profile-img">
+                    <div class="card-body text-center"><img src="{{ user.profile.image.url }}" class="card-profile-img">
                         <h4 class="mb-3 text-gray-light">{{ user.first_name }} {{ user.last_name }}</h4>
                         <p class="mb-4">{{ user.username }} | {{ user.email }}</p>
                         <a href="{% url 'accounts:change_password' %}" class="btn btn-outline-secondary">Change Password</a>
